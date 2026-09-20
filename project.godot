@@ -13,3 +13,7 @@ config_version=5
 config/name="Hyperedi"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"

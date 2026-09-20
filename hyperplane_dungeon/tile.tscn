@@ -37,13 +37,13 @@ texture = SubResource("CanvasTexture_u5x38")
 
 [node name="Blue" type="Sprite2D" parent="." unique_id=468001264]
 modulate = Color(0, 0.49495596, 0.9303912, 1)
-position = Vector2(0, 70)
+position = Vector2(0, -70)
 scale = Vector2(10, 10)
 texture = SubResource("CanvasTexture_u5x38")
 
 [node name="Yellow" type="Sprite2D" parent="." unique_id=893361359]
 modulate = Color(0.84558886, 0.65337914, 0, 1)
-position = Vector2(0, -70)
+position = Vector2(0, 70)
 scale = Vector2(10, 10)
 texture = SubResource("CanvasTexture_u5x38")
 
