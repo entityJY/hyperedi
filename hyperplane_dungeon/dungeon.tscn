@@ -2,9 +2,69 @@
 
 [ext_resource type="Script" uid="uid://buxw3aomrn0jd" path="res://hyperplane_dungeon/dungeon.gd" id="1_2aay1"]
 [ext_resource type="PackedScene" uid="uid://spoimkjbcyv0" path="res://hyperplane_dungeon/tile.tscn" id="2_wr07t"]
+[ext_resource type="PackedScene" uid="uid://km87gubjh8f7" path="res://player/player.tscn" id="3_3j2vp"]
 
-[node name="Dungeon" type="Node2D" unique_id=2012150868]
+[sub_resource type="Gradient" id="Gradient_wr07t"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5x38"]
+gradient = SubResource("Gradient_wr07t")
+
+[sub_resource type="Gradient" id="Gradient_3j2vp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.9608434, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pr5yw"]
+gradient = SubResource("Gradient_3j2vp")
+width = 630
+height = 630
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr5yw"]
+size = Vector2(405, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j2vp"]
+size = Vector2(4, 405)
+
+[node name="Dungeon" type="Node2D" unique_id=2012150868 node_paths=PackedStringArray("player")]
 script = ExtResource("1_2aay1")
 tile_resource = ExtResource("2_wr07t")
+player = NodePath("Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1442836835]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=311376394]
+position = Vector2(0, -1.3589859e-05)
+scale = Vector2(18, 10.125)
+texture = SubResource("GradientTexture2D_u5x38")
+
+[node name="Player" parent="." unique_id=953885872 instance=ExtResource("3_3j2vp")]
+
+[node name="Compass" type="Sprite2D" parent="." unique_id=2117876366]
+texture = SubResource("GradientTexture2D_pr5yw")
+
+[node name="TopDownWalls" type="Area2D" parent="." unique_id=1194128046]
+
+[node name="Bottom" type="CollisionShape2D" parent="TopDownWalls" unique_id=2010123997]
+position = Vector2(0, 210)
+shape = SubResource("RectangleShape2D_pr5yw")
+
+[node name="Top" type="CollisionShape2D" parent="TopDownWalls" unique_id=1626195363]
+position = Vector2(0, -210)
+shape = SubResource("RectangleShape2D_pr5yw")
+
+[node name="LeftRightWalls" type="Area2D" parent="." unique_id=984309629]
+
+[node name="Left" type="CollisionShape2D" parent="LeftRightWalls" unique_id=189310376]
+position = Vector2(-210, 0)
+shape = SubResource("RectangleShape2D_3j2vp")
+
+[node name="Right" type="CollisionShape2D" parent="LeftRightWalls" unique_id=1099791040]
+position = Vector2(210, 0)
+shape = SubResource("RectangleShape2D_3j2vp")
+
+[connection signal="body_entered" from="TopDownWalls" to="." method="_on_top_down_walls_body_entered"]
+[connection signal="body_entered" from="LeftRightWalls" to="." method="_on_left_right_walls_body_entered"]

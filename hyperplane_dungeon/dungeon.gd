@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var tile_resource: PackedScene
+@export var player: Player
 
 var loaded_tiles: Array[Array] = [
 	[null, null, null],
@@ -30,7 +31,7 @@ func enable_tile(tile: Tile, tile_position: Vector2i) -> void:
 	tile.grid_position = tile_position
 	tile.visible = true
 	tile.process_mode = Node.PROCESS_MODE_INHERIT
-	tile.position = (tile_position - Vector2i(1, 1)) * 186
+	tile.position = (tile_position - Vector2i(1, 1)) * 135
 
 func enable_neighbor_tiles(tile: Tile):
 	var tile_rotation = tile.rotation
@@ -61,8 +62,18 @@ func initialize_level() -> void:
 		tile.process_mode = Node.PROCESS_MODE_DISABLED
 		tile.hyperplane_node = node
 		node.tile = tile
+		tile.body_entered.connect(enable_neighbor_tiles)
 	
 	var starting_tile: Tile = hyperplane.cell_hashmap.values().pick_random().tile
 	enable_tile(starting_tile, Vector2i(1, 1))
 
-	enable_neighbor_tiles(starting_tile)
+
+func _on_top_down_walls_body_entered(body: Node2D) -> void:
+	if body != player:
+		return
+	body.position.y = -190 * sign(body.position.y)
+
+func _on_left_right_walls_body_entered(body: Node2D) -> void:
+	if body != player:
+		return
+	body.position.x = -190 * sign(body.position.x)
