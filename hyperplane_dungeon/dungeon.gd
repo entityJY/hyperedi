@@ -56,11 +56,6 @@ func enable_neighbor_tiles(tile: Tile):
 		var from_index = node.reachable_neighbors.find_key(tile.hyperplane_node)
 		var neighbor_tile = node.tile
 
-		print("index debug")
-		print(index)
-		print(from_index)
-		print("\n")
-
 		var final_rotation_int: int
 		match index - from_index:
 			-2: final_rotation_int = 0
@@ -75,7 +70,6 @@ func enable_neighbor_tiles(tile: Tile):
 		var neighbor_tile_position: Vector2i
 
 		index = wrapi(index - int(tile.rotation * 2 / PI), 0, 4)
-		print("new index: ", index)
 
 		match index:
 			0: neighbor_tile_position = Vector2i(wrapi(tile.grid_position.x + 1, 0, 3), tile.grid_position.y)
@@ -113,10 +107,10 @@ func generate_maze(node: HyperPlaneNode) -> void:
 			node.explored = true
 		else:
 			explore_stack.pop_back()
-		
-		if explore_stack.is_empty():
-			break
-
+			if explore_stack.is_empty():
+				break
+			node = explore_stack[-1]
+			
 func initialize_level() -> void:
 	var hyperplane = HyperPlane.new(2)
 	for node in hyperplane.cell_hashmap.values():
