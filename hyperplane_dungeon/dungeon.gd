@@ -5,6 +5,7 @@ extends Node2D
 @export var player: Player
 @export var debug_label: RichTextLabel
 @export var compass: Compass
+@export var game_complete_text: RichTextLabel
 
 @export var depth: int = 2
 
@@ -152,5 +153,10 @@ func _on_left_right_walls_body_entered(body: Node2D) -> void:
 
 func wait_for_win(center_tile: Tile) -> void:
 	await center_tile.body_entered
-	print("player won!")
+	var tween = get_tree().create_tween()
+	tween.tween_property(game_complete_text, "position", Vector2(-277, -47.5), 1)
 	game_won.emit()
+
+
+func _on_hyper_plan_renderer_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
