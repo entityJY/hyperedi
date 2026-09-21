@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://spoimkjbcyv0" path="res://hyperplane_dungeon/tile.tscn" id="2_wr07t"]
 [ext_resource type="PackedScene" uid="uid://km87gubjh8f7" path="res://player/player.tscn" id="3_3j2vp"]
 [ext_resource type="Script" uid="uid://ddleohfmvmqec" path="res://hyperplane_dungeon/compass.gd" id="4_plkp4"]
-[ext_resource type="PackedScene" uid="uid://b4kjjca31tduk" path="res://hyper_plan_renderer.tscn" id="5_pa1cj"]
+[ext_resource type="PackedScene" uid="uid://b4kjjca31tduk" path="res://ui/ui.tscn" id="5_pa1cj"]
 
 [sub_resource type="Gradient" id="Gradient_wr07t"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)

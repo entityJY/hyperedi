@@ -15,6 +15,10 @@ run/main_scene="uid://bd1pg3xhngavn"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SceneTransition="*uid://dbx3uu0nqg4ds"
+
 [display]
 
 window/stretch/mode="viewport"

@@ -140,6 +140,8 @@ func initialize_level() -> void:
 	generate_maze(starting_tile.hyperplane_node)
 	enable_tile(starting_tile, Vector2i(1, 1))
 
+	SceneTransition.fade_in()
+
 
 func _on_top_down_walls_body_entered(body: Node2D) -> void:
 	if body != player:
@@ -159,4 +161,6 @@ func wait_for_win(center_tile: Tile) -> void:
 
 
 func _on_hyper_plan_renderer_restart_button_pressed() -> void:
+	SceneTransition.fade_out()
+	await SceneTransition.animation_finished
 	get_tree().reload_current_scene()

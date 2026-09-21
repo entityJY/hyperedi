@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4kjjca31tduk"]
 
-[ext_resource type="Script" uid="uid://bh281ev2jv00f" path="res://hyper_plan_renderer.gd" id="1_t1rqr"]
+[ext_resource type="Script" uid="uid://bh281ev2jv00f" path="res://ui/ui.gd" id="1_t1rqr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa1cj"]
 
