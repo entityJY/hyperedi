@@ -6,8 +6,6 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pr5yw"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_u5x38"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr5yw"]
 size = Vector2(100, 100)
 
@@ -15,8 +13,18 @@ size = Vector2(100, 100)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ncmvh"]
 
-[node name="Tile" type="Node2D" unique_id=1757197444]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jusb"]
+size = Vector2(10, 130)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_kwjmu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwjmu"]
+size = Vector2(130, 10)
+
+[node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "label")]
 script = ExtResource("1_8jusb")
+walls = [NodePath("0"), NodePath("1"), NodePath("2"), NodePath("3")]
+label = NodePath("Label")
 
 [node name="Border" type="Sprite2D" parent="." unique_id=1258669480]
 modulate = Color(0.40069774, 0.40069774, 0.40069768, 1)
@@ -26,30 +34,6 @@ texture = SubResource("CanvasTexture_1flmy")
 [node name="Background" type="Sprite2D" parent="." unique_id=981243889]
 scale = Vector2(130, 130)
 texture = SubResource("CanvasTexture_pr5yw")
-
-[node name="Red" type="Sprite2D" parent="." unique_id=789123931]
-modulate = Color(0.93605393, 0, 0.16630316, 1)
-position = Vector2(50, 0)
-scale = Vector2(10, 10)
-texture = SubResource("CanvasTexture_u5x38")
-
-[node name="Green" type="Sprite2D" parent="." unique_id=586725754]
-modulate = Color(0.1862674, 0.6016274, 0, 1)
-position = Vector2(-50, 0)
-scale = Vector2(10, 10)
-texture = SubResource("CanvasTexture_u5x38")
-
-[node name="Blue" type="Sprite2D" parent="." unique_id=468001264]
-modulate = Color(0, 0.49495596, 0.9303912, 1)
-position = Vector2(0, -50)
-scale = Vector2(10, 10)
-texture = SubResource("CanvasTexture_u5x38")
-
-[node name="Yellow" type="Sprite2D" parent="." unique_id=893361359]
-modulate = Color(0.84558886, 0.65337914, 0, 1)
-position = Vector2(0, 50)
-scale = Vector2(10, 10)
-texture = SubResource("CanvasTexture_u5x38")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=666074011]
 
@@ -97,5 +81,56 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(65, -65)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
+
+[node name="0" type="StaticBody2D" parent="." unique_id=7154654]
+position = Vector2(65, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="0" unique_id=343322297]
+shape = SubResource("RectangleShape2D_8jusb")
+
+[node name="Sprite2D" type="Sprite2D" parent="0" unique_id=2046177747]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(10, 130)
+texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="1" type="StaticBody2D" parent="." unique_id=1150352967]
+position = Vector2(0, -65)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1" unique_id=1273030925]
+shape = SubResource("RectangleShape2D_kwjmu")
+
+[node name="Sprite2D" type="Sprite2D" parent="1" unique_id=508938442]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(130, 10)
+texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="2" type="StaticBody2D" parent="." unique_id=956310327]
+position = Vector2(-65, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2" unique_id=1989241879]
+shape = SubResource("RectangleShape2D_8jusb")
+
+[node name="Sprite2D" type="Sprite2D" parent="2" unique_id=1227831460]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(10, 130)
+texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="3" type="StaticBody2D" parent="." unique_id=1365656111]
+position = Vector2(0, 65)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="3" unique_id=879951348]
+shape = SubResource("RectangleShape2D_kwjmu")
+
+[node name="Sprite2D" type="Sprite2D" parent="3" unique_id=1069959841]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(130, 10)
+texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="Label" type="Label" parent="." unique_id=1210329761]
+modulate = Color(0, 0, 0, 1)
+offset_left = -22.0
+offset_top = -12.0
+offset_right = 18.0
+offset_bottom = 11.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
