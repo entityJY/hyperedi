@@ -7,7 +7,7 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_pr5yw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr5yw"]
-size = Vector2(100, 100)
+size = Vector2(90, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5x38"]
 
@@ -61,24 +61,28 @@ shape = SubResource("RectangleShape2D_u5x38")
 
 [node name="BRSprite" type="Sprite2D" parent="PermanentWalls" unique_id=1742533761]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 position = Vector2(65, 65)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="BLSprite" type="Sprite2D" parent="PermanentWalls" unique_id=662319085]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 position = Vector2(-65, 65)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="TLSprite" type="Sprite2D" parent="PermanentWalls" unique_id=1615961174]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 position = Vector2(-65, -65)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="TRSprite" type="Sprite2D" parent="PermanentWalls" unique_id=213435248]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 position = Vector2(65, -65)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
@@ -91,6 +95,7 @@ shape = SubResource("RectangleShape2D_8jusb")
 
 [node name="Sprite2D" type="Sprite2D" parent="0" unique_id=2046177747]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 scale = Vector2(10, 130)
 texture = SubResource("CanvasTexture_kwjmu")
 
@@ -102,6 +107,7 @@ shape = SubResource("RectangleShape2D_kwjmu")
 
 [node name="Sprite2D" type="Sprite2D" parent="1" unique_id=508938442]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 scale = Vector2(130, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 
@@ -113,6 +119,7 @@ shape = SubResource("RectangleShape2D_8jusb")
 
 [node name="Sprite2D" type="Sprite2D" parent="2" unique_id=1227831460]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 scale = Vector2(10, 130)
 texture = SubResource("CanvasTexture_kwjmu")
 
@@ -124,6 +131,7 @@ shape = SubResource("RectangleShape2D_kwjmu")
 
 [node name="Sprite2D" type="Sprite2D" parent="3" unique_id=1069959841]
 modulate = Color(0, 0, 0, 1)
+z_index = 2
 scale = Vector2(130, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 

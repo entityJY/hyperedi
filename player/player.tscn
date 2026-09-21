@@ -19,7 +19,7 @@ fill_to = Vector2(0.5, 1)
 radius = 19.235384
 
 [node name="Player" type="CharacterBody2D" unique_id=953885872]
-modulate = Color(0, 0.4938519, 0.89922094, 1)
+modulate = Color(0, 0.6310074, 0.6318191, 1)
 z_index = 2
 motion_mode = 1
 script = ExtResource("1_oul6g")
