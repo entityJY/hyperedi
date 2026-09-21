@@ -5,6 +5,8 @@ extends Node2D
 @export var player: Player
 @export var debug_label: RichTextLabel
 
+@export var depth: int = 2
+
 var loaded_tiles: Array[Array] = [
 	[null, null, null],
 	[null, null, null],
@@ -92,7 +94,7 @@ func generate_maze(node: HyperPlaneNode) -> void:
 			func(neighbor): return neighbor != explore_stack[-1] and neighbor.explored == false
 		)
 
-		if rng.randf() > .8:
+		if rng.randf() > .6:
 			var neighbor_node = node.neighbors.values().pick_random()
 			node.reachable_neighbors[node.neighbors.find_key(neighbor_node)] = neighbor_node
 			neighbor_node.reachable_neighbors[neighbor_node.neighbors.find_key(node)] = node
@@ -112,7 +114,7 @@ func generate_maze(node: HyperPlaneNode) -> void:
 			node = explore_stack[-1]
 			
 func initialize_level() -> void:
-	var hyperplane = HyperPlane.new(2)
+	var hyperplane = HyperPlane.new(depth)
 	for node in hyperplane.cell_hashmap.values():
 		var tile: Tile = tile_resource.instantiate()
 		add_child(tile)
@@ -125,7 +127,10 @@ func initialize_level() -> void:
 
 		tile.body_entered.connect(enable_neighbor_tiles)
 	
-	var starting_tile: Tile = hyperplane.cell_hashmap.values().pick_random().tile
+	var starting_tile: Tile
+	while true:
+		starting_tile = hyperplane.cell_hashmap.values().pick_random().tile
+		if len(starting_tile.hyperplane_node.coordinates) >= depth: break
 	generate_maze(starting_tile.hyperplane_node)
 	enable_tile(starting_tile, Vector2i(1, 1))
 
@@ -133,9 +138,9 @@ func initialize_level() -> void:
 func _on_top_down_walls_body_entered(body: Node2D) -> void:
 	if body != player:
 		return
-	body.position.y = -190 * sign(body.position.y)
+	body.position.y = -185 * sign(body.position.y)
 
 func _on_left_right_walls_body_entered(body: Node2D) -> void:
 	if body != player:
 		return
-	body.position.x = -190 * sign(body.position.x)
+	body.position.x = -185 * sign(body.position.x)

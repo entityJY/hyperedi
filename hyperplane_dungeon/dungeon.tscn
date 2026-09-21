@@ -68,6 +68,7 @@ position = Vector2(210, 0)
 shape = SubResource("RectangleShape2D_3j2vp")
 
 [node name="Label" type="RichTextLabel" parent="." unique_id=2061166878]
+visible = false
 modulate = Color(0.2251136, 0.43772528, 1, 1)
 z_index = 1
 custom_maximum_size = Vector2(300, 900)
