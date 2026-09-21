@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://buxw3aomrn0jd" path="res://hyperplane_dungeon/dungeon.gd" id="1_2aay1"]
 [ext_resource type="PackedScene" uid="uid://spoimkjbcyv0" path="res://hyperplane_dungeon/tile.tscn" id="2_wr07t"]
 [ext_resource type="PackedScene" uid="uid://km87gubjh8f7" path="res://player/player.tscn" id="3_3j2vp"]
+[ext_resource type="Script" uid="uid://ddleohfmvmqec" path="res://hyperplane_dungeon/compass.gd" id="4_plkp4"]
 
 [sub_resource type="Gradient" id="Gradient_wr07t"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -29,11 +30,12 @@ size = Vector2(405, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j2vp"]
 size = Vector2(4, 405)
 
-[node name="Dungeon" type="Node2D" unique_id=2012150868 node_paths=PackedStringArray("player", "debug_label")]
+[node name="Dungeon" type="Node2D" unique_id=2012150868 node_paths=PackedStringArray("player", "debug_label", "compass")]
 script = ExtResource("1_2aay1")
 tile_resource = ExtResource("2_wr07t")
 player = NodePath("Player")
 debug_label = NodePath("Label")
+compass = NodePath("Compass")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1442836835]
 
@@ -44,8 +46,15 @@ texture = SubResource("GradientTexture2D_u5x38")
 
 [node name="Player" parent="." unique_id=953885872 instance=ExtResource("3_3j2vp")]
 
-[node name="Compass" type="Sprite2D" parent="." unique_id=2117876366]
+[node name="Compass" type="Sprite2D" parent="." unique_id=2117876366 node_paths=PackedStringArray("player")]
 texture = SubResource("GradientTexture2D_pr5yw")
+script = ExtResource("4_plkp4")
+player = NodePath("../Player")
+
+[node name="Polygon2D" type="Polygon2D" parent="Compass" unique_id=1107559738]
+position = Vector2(302, 0)
+color = Color(0, 0.6310074, 0.6318191, 1)
+polygon = PackedVector2Array(0, 20, 0, -20, 20, 0)
 
 [node name="TopDownWalls" type="Area2D" parent="." unique_id=1194128046]
 

@@ -4,6 +4,7 @@ extends Node2D
 @export var tile_resource: PackedScene
 @export var player: Player
 @export var debug_label: RichTextLabel
+@export var compass: Compass
 
 @export var depth: int = 2
 
@@ -13,13 +14,11 @@ var loaded_tiles: Array[Array] = [
 	[null, null, null]
 ]
 
+signal game_won()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	initialize_level()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 
 func disable_tile(tile: Tile) -> void:
@@ -44,6 +43,8 @@ func enable_tile(tile: Tile, tile_position: Vector2i) -> void:
 		wall.process_mode = Node.PROCESS_MODE_DISABLED
 
 func enable_neighbor_tiles(tile: Tile):
+
+	compass.current_tile = tile
 
 	debug_label.text = "Current tile: " + tile.hyperplane_node.get_coordinates_nice() + "\n\n+-+-+-+-+\n\n"
 	debug_label.text += "Reachable Neighbors:\n" + tile.hyperplane_node.get_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n"
@@ -126,6 +127,10 @@ func initialize_level() -> void:
 		tile.label.text = tile.hyperplane_node.get_coordinates_nice()
 
 		tile.body_entered.connect(enable_neighbor_tiles)
+
+		if node.coordinates == [HyperPlane.Steps.C]:
+			tile.background.modulate = Color.AQUA
+			wait_for_win(tile)
 	
 	var starting_tile: Tile
 	while true:
@@ -144,3 +149,8 @@ func _on_left_right_walls_body_entered(body: Node2D) -> void:
 	if body != player:
 		return
 	body.position.x = -185 * sign(body.position.x)
+
+func wait_for_win(center_tile: Tile) -> void:
+	await center_tile.body_entered
+	print("player won!")
+	game_won.emit()

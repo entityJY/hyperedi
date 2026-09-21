@@ -5,6 +5,7 @@ class_name Tile
 ## array of disable able walls in order of E, N, W, S
 @export var walls: Array[StaticBody2D]
 @export var label: Label
+@export var background: Sprite2D
 
 var grid_position: Vector2i
 var hyperplane_node: HyperPlaneNode
