@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://dbx3uu0nqg4ds"]
 
 [ext_resource type="Script" uid="uid://v8tprs1ww3dc" path="res://scene_transition/scene_transition.gd" id="1_1tgxw"]
+[ext_resource type="AudioStream" uid="uid://djnxdggumtt3k" path="res://music/delosound-lofi-lofi-chill-lofi-girl-456265.mp3" id="2_cskgs"]
+[ext_resource type="AudioStream" uid="uid://dqphm1bm0v1c8" path="res://music/low_atmos-low-atmos-background-vector-507483.mp3" id="3_x0jb5"]
+[ext_resource type="AudioStream" uid="uid://e0mi5xxhrqgu" path="res://music/renilsonb-divine-509609.mp3" id="4_beyde"]
 
 [sub_resource type="Animation" id="Animation_1tgxw"]
 length = 0.001
@@ -56,10 +59,12 @@ _data = {
 &"fade_out": SubResource("Animation_yc5g4")
 }
 
-[node name="SceneTransition" type="CanvasLayer" unique_id=256597221 node_paths=PackedStringArray("animation_player")]
+[node name="SceneTransition" type="CanvasLayer" unique_id=256597221 node_paths=PackedStringArray("animation_player", "audio_stream_player")]
 layer = 2
 script = ExtResource("1_1tgxw")
 animation_player = NodePath("AnimationPlayer")
+music_sources = Array[AudioStreamMP3]([ExtResource("2_cskgs"), ExtResource("3_x0jb5"), ExtResource("4_beyde")])
+audio_stream_player = NodePath("AudioStreamPlayer")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=755164870]
 color = Color(0, 0, 0, 1)
@@ -72,4 +77,7 @@ polygon = PackedVector2Array(-10, 0, 1562, 0, 1162, 648, -410, 648)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1565375608]
 libraries/ = SubResource("AnimationLibrary_1tgxw")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1104298245]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
