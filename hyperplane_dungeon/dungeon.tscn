@@ -38,7 +38,7 @@ player = NodePath("Player")
 debug_label = NodePath("Label")
 compass = NodePath("Compass")
 game_complete_text = NodePath("GameComplete")
-depth = 3
+depth = 5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1442836835]
 
@@ -114,6 +114,7 @@ offset_bottom = 296.0
 [node name="HyperPlanRenderer" parent="." unique_id=1106087896 instance=ExtResource("5_pa1cj")]
 
 [node name="GameComplete" type="RichTextLabel" parent="." unique_id=865423679]
+visible = false
 z_index = 5
 anchors_preset = 8
 anchor_left = 0.5
