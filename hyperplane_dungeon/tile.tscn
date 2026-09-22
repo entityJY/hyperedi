@@ -21,10 +21,10 @@ size = Vector2(10, 130)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwjmu"]
 size = Vector2(130, 10)
 
-[node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "label", "background")]
+[node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "debug_label", "background")]
 script = ExtResource("1_8jusb")
 walls = [NodePath("0"), NodePath("1"), NodePath("2"), NodePath("3")]
-label = NodePath("Label")
+debug_label = NodePath("DebugLabel")
 background = NodePath("Background")
 
 [node name="Border" type="Sprite2D" parent="." unique_id=1258669480]
@@ -135,7 +135,7 @@ z_index = 2
 scale = Vector2(130, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 
-[node name="Label" type="Label" parent="." unique_id=1210329761]
+[node name="DebugLabel" type="Label" parent="." unique_id=1210329761]
 visible = false
 modulate = Color(0, 0, 0, 1)
 offset_left = -22.0

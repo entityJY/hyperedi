@@ -3,6 +3,7 @@ extends CanvasLayer
 @export var credits: RichTextLabel
 @export var depth_label: Label
 @export var depth_slider: HSlider
+@export var debug_button: Button
 var credits_toggled: bool = false
 signal restart_button_pressed()
 
@@ -10,6 +11,8 @@ signal restart_button_pressed()
 func _ready() -> void:
 	var _hyperplane = HyperPlane.new(2)
 	update_depth()
+	debug_button.set_pressed_no_signal(SceneTransition.debug)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -38,5 +41,11 @@ func _on_credits_button_down() -> void:
 
 
 func _on_h_slider_value_changed(value: float) -> void:
+	@warning_ignore("NARROWING_CONVERSION")
 	SceneTransition.dungeon_depth = value
 	update_depth()
+
+
+func _on_debug_toggled(toggled_on: bool) -> void:
+	SceneTransition.debug = toggled_on
+	restart_button_pressed.emit()

@@ -21,6 +21,7 @@ signal game_won()
 func _ready() -> void:
 	depth = SceneTransition.dungeon_depth
 	initialize_level()
+	debug_label.visible = SceneTransition.debug
 
 
 func disable_tile(tile: Tile) -> void:
@@ -129,7 +130,7 @@ func initialize_level() -> void:
 		tile.hyperplane_node = node
 		node.tile = tile
 
-		tile.label.text = tile.hyperplane_node.get_coordinates_nice()
+		tile.debug_label.text = tile.hyperplane_node.get_coordinates_nice()
 
 		tile.body_entered.connect(enable_neighbor_tiles)
 

@@ -35,7 +35,7 @@ size = Vector2(4, 405)
 script = ExtResource("1_2aay1")
 tile_resource = ExtResource("2_wr07t")
 player = NodePath("Player")
-debug_label = NodePath("Label")
+debug_label = NodePath("DebugLabel")
 compass = NodePath("Compass")
 game_complete_text = NodePath("GameComplete")
 
@@ -101,7 +101,7 @@ rotation = 1.5707964
 color = Color(0, 0.6310074, 0.6318191, 1)
 polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
 
-[node name="Label" type="RichTextLabel" parent="." unique_id=2061166878]
+[node name="DebugLabel" type="RichTextLabel" parent="." unique_id=2061166878]
 visible = false
 modulate = Color(0.2251136, 0.43772528, 1, 1)
 z_index = 1
