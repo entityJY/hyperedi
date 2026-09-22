@@ -49,25 +49,27 @@ func enable_neighbor_tiles(tile: Tile):
 	player.current_tile = tile
 
 	debug_label.text = "Current tile: " + tile.hyperplane_node.get_coordinates_nice() + "\n\n+-+-+-+-+\n\n"
-	debug_label.text += "Reachable Neighbors:\n" + tile.hyperplane_node.get_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n"
+	debug_label.text += "Reachable Neighbors:\n" + tile.hyperplane_node.get_reachable_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n"
 
 	var tile_rotation = tile.rotation
 	for index in tile.hyperplane_node.reachable_neighbors.keys():
 		var node = tile.hyperplane_node.reachable_neighbors[index]
 
 		debug_label.text += node.get_coordinates_nice() + "\n"
-		debug_label.text += node.get_neighbors_nice() + "---------\n"
+		debug_label.text += node.get_reachable_neighbors_nice() + "---------\n"
 
 		var from_index = node.reachable_neighbors.find_key(tile.hyperplane_node)
 		var neighbor_tile = node.tile
 
 		var final_rotation_int: int
 		match index - from_index:
+			-3: final_rotation_int = 1
 			-2: final_rotation_int = 0
 			-1: final_rotation_int = 3
 			0: final_rotation_int = 2
 			1: final_rotation_int = 1
 			2: final_rotation_int = 0
+			3: final_rotation_int = 3
 
 		var final_rotation = wrapf(final_rotation_int * PI / 2 + tile_rotation, 0, 2*PI)
 		neighbor_tile.rotation = final_rotation
