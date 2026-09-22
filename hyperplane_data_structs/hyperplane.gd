@@ -50,8 +50,20 @@ func _init(depth: int = 2) -> void:
 
 		# add right neighbor
 		if cell.coordinates[-1] == Steps.R:
-			var new_coord = cell.coordinates.slice(0, -2)
-			new_coord += [turn_direction_right(cell.coordinates[-2]), Steps.L]
+			var new_coord = cell.coordinates.slice(0, -1)
+			var rf_count = 0
+			while new_coord.slice(-2) == [Steps.R, Steps.F]:
+				new_coord = new_coord.slice(0, -2)
+				rf_count += 1
+			new_coord[-1] = turn_direction_right(new_coord[-1])
+			new_coord.append(Steps.L)
+
+			var added_rf: Array[Steps] = []
+			added_rf.resize(rf_count)
+			added_rf.fill(Steps.F)
+			
+			new_coord += added_rf
+
 			cell.neighbors[wrapi(3+cell_rotation, 0, 4)] = cell_hashmap[new_coord]
 		elif len(cell.coordinates) <= depth:
 			cell.neighbors[wrapi(3+cell_rotation, 0, 4)] = cell_hashmap[cell.coordinates + [Steps.R]]
@@ -66,6 +78,11 @@ func _init(depth: int = 2) -> void:
 		if cell.coordinates[-1] == Steps.L:
 			var new_coord = cell.coordinates.slice(0, -2)
 			new_coord += [turn_direction_left(cell.coordinates[-2]), Steps.R]
+			cell.neighbors[wrapi(1+cell_rotation, 0, 4)] = cell_hashmap[new_coord]
+		elif cell.coordinates.slice(-2) == [Steps.L, Steps.F] and len(cell.coordinates) <= depth:
+			var new_coord = cell.coordinates.slice(0, -2)
+			new_coord[-1] = turn_direction_left(new_coord[-1])
+			new_coord += [Steps.R, Steps.F, Steps.R]
 			cell.neighbors[wrapi(1+cell_rotation, 0, 4)] = cell_hashmap[new_coord]
 		elif len(cell.coordinates) <= depth:
 			cell.neighbors[wrapi(1+cell_rotation, 0, 4)] = cell_hashmap[cell.coordinates + [Steps.L]]

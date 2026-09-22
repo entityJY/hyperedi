@@ -30,7 +30,11 @@ func get_reachable_neighbors_nice() -> String:
 	return final_str
 
 func get_coordinates_nice() -> String:
+	return coordinates_to_string(coordinates)
+
+static func coordinates_to_string(array: Array) -> String:
+	array = array as Array[HyperPlane.Steps]
 	var final_str: String = ""
-	for dir in coordinates:
+	for dir in array:
 		final_str += HyperPlane.Steps.find_key(dir)
 	return final_str
