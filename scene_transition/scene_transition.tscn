@@ -68,11 +68,11 @@ audio_stream_player = NodePath("AudioStreamPlayer")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=755164870]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 1552, 0, 1152, 648, -400, 648)
+polygon = PackedVector2Array(-25, 0, 1577, 0, 1177, 648, -425, 648)
 
 [node name="Polygon2D2" type="Polygon2D" parent="Polygon2D" unique_id=283744929]
 show_behind_parent = true
-polygon = PackedVector2Array(-10, 0, 1562, 0, 1162, 648, -410, 648)
+polygon = PackedVector2Array(-35, 0, 1587, 0, 1187, 648, -435, 648)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1565375608]
 libraries/ = SubResource("AnimationLibrary_1tgxw")
