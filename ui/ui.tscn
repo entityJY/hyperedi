@@ -100,10 +100,20 @@ theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Current Depth: "
+horizontal_alignment = 1
 
 [node name="DepthSlider" type="HSlider" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1278360574]
 layout_mode = 2
 max_value = 10.0
+
+[node name="DepthLabel2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1886522556]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Warning! Higher values 
+will increase loading 
+time greatly, especially
+on web"
+horizontal_alignment = 1
 
 [node name="VSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1254290010]
 layout_mode = 2
