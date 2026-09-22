@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://b4kjjca31tduk"]
 
 [ext_resource type="Script" uid="uid://bh281ev2jv00f" path="res://ui/ui.gd" id="1_t1rqr"]
-[ext_resource type="AudioStream" uid="uid://djnxdggumtt3k" path="res://music/delosound-lofi-lofi-chill-lofi-girl-456265.mp3" id="2_vkava"]
-[ext_resource type="AudioStream" uid="uid://dqphm1bm0v1c8" path="res://music/low_atmos-low-atmos-background-vector-507483.mp3" id="3_tf0e0"]
-[ext_resource type="AudioStream" uid="uid://e0mi5xxhrqgu" path="res://music/renilsonb-divine-509609.mp3" id="4_obcwv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa1cj"]
 
@@ -25,11 +22,11 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "audio_stream_player")]
+[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider")]
 script = ExtResource("1_t1rqr")
 credits = NodePath("RichTextLabel")
-music_sources = Array[AudioStreamMP3]([ExtResource("2_vkava"), ExtResource("3_tf0e0"), ExtResource("4_obcwv")])
-audio_stream_player = NodePath("")
+depth_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthLabel")
+depth_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1021052557]
 anchors_preset = 15
@@ -99,6 +96,15 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_nvlst")
 text = "Credits
 "
 
+[node name="DepthLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=299942730]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Current Depth: "
+
+[node name="DepthSlider" type="HSlider" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1278360574]
+layout_mode = 2
+max_value = 10.0
+
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=328547320]
 custom_minimum_size = Vector2(650, 200)
 anchors_preset = 8
@@ -127,3 +133,4 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Restart" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Credits" to="." method="_on_credits_button_down"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider" to="." method="_on_h_slider_value_changed"]

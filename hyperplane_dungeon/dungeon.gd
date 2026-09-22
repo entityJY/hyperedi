@@ -7,7 +7,7 @@ extends Node2D
 @export var compass: Compass
 @export var game_complete_text: RichTextLabel
 
-@export var depth: int = 2
+var depth: int
 
 var loaded_tiles: Array[Array] = [
 	[null, null, null],
@@ -19,6 +19,7 @@ signal game_won()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	depth = SceneTransition.dungeon_depth
 	initialize_level()
 
 

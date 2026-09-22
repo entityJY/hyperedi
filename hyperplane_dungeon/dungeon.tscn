@@ -38,7 +38,6 @@ player = NodePath("Player")
 debug_label = NodePath("Label")
 compass = NodePath("Compass")
 game_complete_text = NodePath("GameComplete")
-depth = 5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1442836835]
 
@@ -103,6 +102,7 @@ color = Color(0, 0.6310074, 0.6318191, 1)
 polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
 
 [node name="Label" type="RichTextLabel" parent="." unique_id=2061166878]
+visible = false
 modulate = Color(0.2251136, 0.43772528, 1, 1)
 z_index = 1
 custom_maximum_size = Vector2(300, 900)

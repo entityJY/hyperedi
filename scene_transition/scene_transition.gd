@@ -10,6 +10,9 @@ var curr_music_index = 0
 signal animation_finished()
 
 
+var dungeon_depth: int = 2
+
+
 func _ready() -> void:
 	_on_audio_stream_player_finished()
 
