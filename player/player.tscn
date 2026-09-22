@@ -18,11 +18,12 @@ fill_to = Vector2(0.5, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_kqu6x"]
 radius = 19.235384
 
-[node name="Player" type="CharacterBody2D" unique_id=953885872]
+[node name="Player" type="CharacterBody2D" unique_id=953885872 node_paths=PackedStringArray("sprite")]
 modulate = Color(0, 0.6310074, 0.6318191, 1)
 z_index = 2
 motion_mode = 1
 script = ExtResource("1_oul6g")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1873928384]
 texture = SubResource("GradientTexture2D_kqu6x")

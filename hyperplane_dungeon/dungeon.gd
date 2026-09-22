@@ -46,6 +46,7 @@ func enable_tile(tile: Tile, tile_position: Vector2i) -> void:
 func enable_neighbor_tiles(tile: Tile):
 
 	compass.current_tile = tile
+	player.current_tile = tile
 
 	debug_label.text = "Current tile: " + tile.hyperplane_node.get_coordinates_nice() + "\n\n+-+-+-+-+\n\n"
 	debug_label.text += "Reachable Neighbors:\n" + tile.hyperplane_node.get_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n"
