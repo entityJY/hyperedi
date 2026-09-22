@@ -9,7 +9,8 @@ var facing_direction: int = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var player_position = Vector2(wrapf(player.position.x, -135, 135), wrapf(player.position.y, -135, 135))
+	@warning_ignore("INTEGER_DIVISION")
+	var player_position = Vector2(wrapf(player.position.x, -135/2, 135/2), wrapf(player.position.y, -135/2, 135/2))
 
 	if !is_instance_valid(current_tile): return
 
