@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name UI
 
 @export var credits: RichTextLabel
 @export var depth_label: Label
@@ -8,6 +9,7 @@ extends CanvasLayer
 @export var connectedness_label: Label
 @export var connectedness_slider: HSlider
 @export var lighting_button: Button
+@export var debug_label: RichTextLabel
 
 var credits_toggled: bool = false
 signal restart_button_pressed()
@@ -23,6 +25,7 @@ func _ready() -> void:
 	update_connectedness()
 	debug_button.set_pressed_no_signal(SceneTransition.debug)
 	lighting_button.set_pressed_no_signal(SceneTransition.lighting_enabled)
+	debug_label.visible = SceneTransition.debug
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,5 +76,11 @@ func _on_connectedness_slider_value_changed(value: float) -> void:
 
 
 func _on_debug_2_toggled(toggled_on: bool) -> void:
-	SceneTransition.lighting_enabled = !toggled_on
-	lighting_changed.emit(!toggled_on)
+	SceneTransition.lighting_enabled = toggled_on
+	lighting_changed.emit(toggled_on)
+
+func set_debug_text(text: String) -> void:
+	debug_label.text = text
+
+func append_debug_text(text: String) -> void:
+	debug_label.text += text

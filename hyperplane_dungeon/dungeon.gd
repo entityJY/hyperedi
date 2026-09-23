@@ -3,11 +3,11 @@ extends Node2D
 
 @export var tile_resource: PackedScene
 @export var player: Player
-@export var debug_label: RichTextLabel
 @export var compass: Compass
 @export var game_complete_text: RichTextLabel
 @export var tile_container: Node2D
 @export var canvas_modulate: CanvasModulate
+@export var ui: UI
 
 var loaded_tiles: Dictionary[Vector2i, Tile]
 
@@ -16,7 +16,6 @@ signal game_won()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	initialize_level()
-	debug_label.visible = SceneTransition.debug
 	_on_hyper_plan_renderer_lighting_changed(SceneTransition.lighting_enabled)
 
 func _physics_process(delta: float) -> void:
@@ -49,15 +48,15 @@ func enable_neighbor_tiles(tile: Tile):
 	compass.current_tile = tile
 	player.current_tile = tile
 
-	debug_label.text = "Current tile: " + tile.hyperplane_node.get_coordinates_nice() + "\n\n+-+-+-+-+\n\n"
-	debug_label.text += "Reachable Neighbors:\n" + tile.hyperplane_node.get_reachable_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n"
+	ui.set_debug_text("Current tile: " + tile.hyperplane_node.get_coordinates_nice() + "\n\n+-+-+-+-+\n\n")
+	ui.append_debug_text("Reachable Neighbors:\n" + tile.hyperplane_node.get_reachable_neighbors_nice() + "\n+-+-+-+-+\n\nReachable Neighbors:\n---------\n")
 
 	var tile_rotation = tile.rotation
 	for index in tile.hyperplane_node.reachable_neighbors.keys():
 		var node = tile.hyperplane_node.reachable_neighbors[index]
 
-		debug_label.text += node.get_coordinates_nice() + "\n"
-		debug_label.text += node.get_reachable_neighbors_nice() + "---------\n"
+		ui.append_debug_text(node.get_coordinates_nice() + "\n")
+		ui.append_debug_text(node.get_reachable_neighbors_nice() + "---------\n")
 
 		var from_index = node.reachable_neighbors.find_key(tile.hyperplane_node)
 		var neighbor_tile = node.tile

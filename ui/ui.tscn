@@ -4,6 +4,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pa1cj"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f53te"]
+light_mode = 1
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_41hah"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4tdt"]
@@ -26,7 +29,7 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label", "connectedness_label", "connectedness_slider", "lighting_button")]
+[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label", "connectedness_label", "connectedness_slider", "lighting_button", "debug_label")]
 script = ExtResource("1_t1rqr")
 credits = NodePath("RichTextLabel")
 depth_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthLabel")
@@ -35,7 +38,8 @@ debug_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginCont
 num_rooms_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/NumRoomsLabel")
 connectedness_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessLabel")
 connectedness_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider")
-lighting_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug")
+lighting_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Lighting")
+debug_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer/DebugLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1021052557]
 anchors_preset = 15
@@ -63,9 +67,15 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=160347963]
+[node name="DebugLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1420498444]
+visible = false
+modulate = Color(0.2251136, 0.43772528, 1, 1)
+z_index = 1
+material = SubResource("CanvasItemMaterial_f53te")
+custom_maximum_size = Vector2(300, 900)
 layout_mode = 2
-size_flags_horizontal = 3
+text = "ejafl;kejka;ljfsefasdf
+"
 
 [node name="TextureRect" type="VSeparator" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=789823734]
 custom_minimum_size = Vector2(558, 0)
@@ -124,7 +134,7 @@ layout_mode = 2
 theme_override_constants/separation = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
 
-[node name="Debug2" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=844257695]
+[node name="Lighting" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=844257695]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
@@ -209,7 +219,7 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Restart" to="." method="_on_button_button_down"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider" to="." method="_on_h_slider_value_changed"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug2" to="." method="_on_debug_2_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Lighting" to="." method="_on_debug_2_toggled"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider" to="." method="_on_connectedness_slider_value_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug" to="." method="_on_debug_toggled"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Credits" to="." method="_on_credits_button_down"]

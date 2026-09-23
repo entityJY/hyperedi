@@ -34,9 +34,6 @@ fill_to = Vector2(0.5, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gsw4x"]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f53te"]
-light_mode = 1
-
 [sub_resource type="Gradient" id="Gradient_pa1cj"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.37650603)
@@ -49,15 +46,15 @@ height = 1152
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Dungeon" type="Node2D" unique_id=2012150868 node_paths=PackedStringArray("player", "debug_label", "compass", "game_complete_text", "tile_container", "canvas_modulate")]
+[node name="Dungeon" type="Node2D" unique_id=2012150868 node_paths=PackedStringArray("player", "compass", "game_complete_text", "tile_container", "canvas_modulate", "ui")]
 script = ExtResource("1_2aay1")
 tile_resource = ExtResource("2_wr07t")
 player = NodePath("Player")
-debug_label = NodePath("DebugLabel")
 compass = NodePath("Compass")
 game_complete_text = NodePath("CanvasLayer/GameComplete")
 tile_container = NodePath("TileContainer")
 canvas_modulate = NodePath("CanvasModulate")
+ui = NodePath("ui")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1442836835]
 
@@ -82,18 +79,7 @@ position = Vector2(302, 0)
 color = Color(0, 0.6310074, 0.6318191, 1)
 polygon = PackedVector2Array(0, 20, 0, -20, 20, 0)
 
-[node name="DebugLabel" type="RichTextLabel" parent="." unique_id=2061166878]
-visible = false
-modulate = Color(0.2251136, 0.43772528, 1, 1)
-z_index = 1
-material = SubResource("CanvasItemMaterial_f53te")
-custom_maximum_size = Vector2(300, 900)
-offset_left = -557.0
-offset_top = -304.0
-offset_right = -330.0
-offset_bottom = 296.0
-
-[node name="HyperPlanRenderer" parent="." unique_id=1106087896 instance=ExtResource("5_pa1cj")]
+[node name="ui" parent="." unique_id=1106087896 instance=ExtResource("5_pa1cj")]
 
 [node name="TileContainer" type="Node2D" parent="." unique_id=836584410]
 
@@ -124,5 +110,5 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 64
 text = "Game Complete!"
 
-[connection signal="lighting_changed" from="HyperPlanRenderer" to="." method="_on_hyper_plan_renderer_lighting_changed"]
-[connection signal="restart_button_pressed" from="HyperPlanRenderer" to="." method="_on_hyper_plan_renderer_restart_button_pressed"]
+[connection signal="lighting_changed" from="ui" to="." method="_on_hyper_plan_renderer_lighting_changed"]
+[connection signal="restart_button_pressed" from="ui" to="." method="_on_hyper_plan_renderer_restart_button_pressed"]
