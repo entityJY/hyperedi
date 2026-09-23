@@ -9,7 +9,7 @@ class_name SceneFade
 signal animation_finished()
 
 
-var dungeon_depth: int = 2
+var dungeon_depth: int = 3
 var debug: bool = false
 
 
