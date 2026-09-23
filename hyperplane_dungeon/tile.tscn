@@ -2,7 +2,15 @@
 
 [ext_resource type="Script" uid="uid://t2mh6jm4f4ci" path="res://hyperplane_dungeon/tile.gd" id="1_8jusb"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1flmy"]
+[sub_resource type="Gradient" id="Gradient_8jusb"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nb4k0"]
+gradient = SubResource("Gradient_8jusb")
+width = 100
+height = 100
+fill_to = Vector2(1, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pr5yw"]
 
@@ -38,9 +46,7 @@ background = NodePath("Background")
 detector = NodePath("Area2D")
 
 [node name="Border" type="Sprite2D" parent="." unique_id=1258669480]
-modulate = Color(0.40069774, 0.40069774, 0.40069768, 1)
-scale = Vector2(100, 100)
-texture = SubResource("CanvasTexture_1flmy")
+texture = SubResource("GradientTexture2D_nb4k0")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=981243889]
 scale = Vector2(97, 97)

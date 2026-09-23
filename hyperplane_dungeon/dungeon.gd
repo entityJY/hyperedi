@@ -7,6 +7,7 @@ extends Node2D
 @export var compass: Compass
 @export var game_complete_text: RichTextLabel
 @export var tile_container: Node2D
+@export var canvas_modulate: CanvasModulate
 
 var loaded_tiles: Dictionary[Vector2i, Tile]
 
@@ -16,6 +17,7 @@ signal game_won()
 func _ready() -> void:
 	initialize_level()
 	debug_label.visible = SceneTransition.debug
+	_on_hyper_plan_renderer_lighting_changed(SceneTransition.lighting_enabled)
 
 func _physics_process(delta: float) -> void:
 	tile_container.position -= Vector2(player.out_of_bounds_x, player.out_of_bounds_y) * delta
@@ -158,3 +160,10 @@ func _on_hyper_plan_renderer_restart_button_pressed() -> void:
 	SceneTransition.fade_out()
 	await SceneTransition.animation_finished
 	get_tree().reload_current_scene()
+
+
+func _on_hyper_plan_renderer_lighting_changed(lighting_enabled: bool) -> void:
+	if lighting_enabled:
+		canvas_modulate.color = Color.from_hsv(0, 0, .5)
+	else:
+		canvas_modulate.color = Color.from_hsv(0, 0, 1)

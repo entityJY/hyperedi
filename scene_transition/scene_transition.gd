@@ -11,6 +11,7 @@ signal animation_finished()
 
 var dungeon_depth: int = 3
 var debug: bool = false
+var lighting_enabled: bool = true
 
 ## 0 generates a perfect maze, 1 removes all walls
 var connectedness_factor: float = .3

@@ -7,9 +7,12 @@ extends CanvasLayer
 @export var num_rooms_label: Label
 @export var connectedness_label: Label
 @export var connectedness_slider: HSlider
+@export var lighting_button: Button
 
 var credits_toggled: bool = false
 signal restart_button_pressed()
+
+signal lighting_changed(lighting_enabled: bool)
 
 var room_num_sequence: Array[int] = [1, 5, 17, 45, 109, 253, 577, 1305, 2941, 6616, 14877, 33437]
 
@@ -19,6 +22,7 @@ func _ready() -> void:
 	update_depth()
 	update_connectedness()
 	debug_button.set_pressed_no_signal(SceneTransition.debug)
+	lighting_button.set_pressed_no_signal(SceneTransition.lighting_enabled)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,3 +70,8 @@ func _on_debug_toggled(toggled_on: bool) -> void:
 func _on_connectedness_slider_value_changed(value: float) -> void:
 	SceneTransition.connectedness_factor = value
 	update_connectedness()
+
+
+func _on_debug_2_toggled(toggled_on: bool) -> void:
+	SceneTransition.lighting_enabled = !toggled_on
+	lighting_changed.emit(!toggled_on)

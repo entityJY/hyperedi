@@ -60,6 +60,7 @@ vertical_alignment = 2
 
 [node name="HSeparator" type="HSeparator" parent="Button/VBoxContainer" unique_id=349560867]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 50
 theme_override_styles/separator = SubResource("StyleBoxLine_q6po8")
 

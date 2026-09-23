@@ -26,7 +26,7 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label", "connectedness_label", "connectedness_slider")]
+[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label", "connectedness_label", "connectedness_slider", "lighting_button")]
 script = ExtResource("1_t1rqr")
 credits = NodePath("RichTextLabel")
 depth_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthLabel")
@@ -35,6 +35,7 @@ debug_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginCont
 num_rooms_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/NumRoomsLabel")
 connectedness_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessLabel")
 connectedness_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider")
+lighting_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1021052557]
 anchors_preset = 15
@@ -113,16 +114,25 @@ horizontal_alignment = 1
 
 [node name="DepthSlider" type="HSlider" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1278360574]
 layout_mode = 2
+tooltip_text = "Warning! Higher values will cause a lot of lag"
 min_value = 1.0
 max_value = 10.0
 value = 1.0
 
-[node name="WarningLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1886522556]
+[node name="VSeparator5" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=399644458]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Warning! Higher values 
-will cause a lot of lag"
-horizontal_alignment = 1
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
+
+[node name="Debug2" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=844257695]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_q4tdt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_41hah")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nvlst")
+toggle_mode = true
+text = "Lighting"
 
 [node name="VSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1254290010]
 layout_mode = 2
@@ -199,6 +209,7 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Restart" to="." method="_on_button_button_down"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug2" to="." method="_on_debug_2_toggled"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider" to="." method="_on_connectedness_slider_value_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug" to="." method="_on_debug_toggled"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Credits" to="." method="_on_credits_button_down"]
