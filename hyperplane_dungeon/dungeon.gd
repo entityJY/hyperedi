@@ -38,7 +38,7 @@ func enable_tile(tile: Tile, tile_position: Vector2i) -> void:
 	tile.grid_position = tile_position
 	tile.visible = true
 	tile.process_mode = Node.PROCESS_MODE_INHERIT
-	tile.position = tile_position * 81
+	tile.position = tile_position * 100
 
 	for key in tile.hyperplane_node.reachable_neighbors.keys():
 		var wall = tile.walls[key]
@@ -121,7 +121,7 @@ func generate_maze(node: HyperPlaneNode) -> void:
 			node = explore_stack[-1]
 			
 func initialize_level() -> void:
-	var hyperplane = HyperPlane.new(depth)
+	var hyperplane = HyperPlane.new(depth - 1)
 	for node in hyperplane.cell_hashmap.values():
 		var tile: Tile = tile_resource.instantiate()
 		tile_container.add_child(tile)
@@ -146,17 +146,6 @@ func initialize_level() -> void:
 	enable_tile(starting_tile, Vector2i(0, 0))
 
 	SceneTransition.fade_in()
-
-
-func _on_top_down_walls_body_entered(body: Node2D) -> void:
-	if body != player:
-		return
-	body.position.y = 100 * sign(body.position.y)
-
-func _on_left_right_walls_body_entered(body: Node2D) -> void:
-	if body != player:
-		return
-	body.position.x = 100 * sign(body.position.x)
 
 func wait_for_win(center_tile: Tile) -> void:
 	await center_tile.body_entered

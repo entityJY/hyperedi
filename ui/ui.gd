@@ -4,8 +4,11 @@ extends CanvasLayer
 @export var depth_label: Label
 @export var depth_slider: HSlider
 @export var debug_button: Button
+@export var num_rooms_label: Label
 var credits_toggled: bool = false
 signal restart_button_pressed()
+
+var room_num_sequence: Array[int] = [1, 5, 17, 45, 109, 253, 577, 1305, 2941, 6616, 14877, 33437]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +28,7 @@ func _process(_delta: float) -> void:
 func update_depth() -> void:
 	depth_label.text = "Current Depth: " + str(SceneTransition.dungeon_depth)
 	depth_slider.value = SceneTransition.dungeon_depth
+	num_rooms_label.text = "Rooms: " + str(room_num_sequence[SceneTransition.dungeon_depth])
 
 
 func _on_button_button_down() -> void:

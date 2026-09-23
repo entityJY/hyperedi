@@ -26,12 +26,13 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button")]
+[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label")]
 script = ExtResource("1_t1rqr")
 credits = NodePath("RichTextLabel")
 depth_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthLabel")
 depth_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider")
 debug_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug")
+num_rooms_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/NumRoomsLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1021052557]
 anchors_preset = 15
@@ -102,17 +103,26 @@ theme_override_font_sizes/font_size = 22
 text = "Current Depth: "
 horizontal_alignment = 1
 
+[node name="NumRoomsLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1553628423]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Rooms: "
+horizontal_alignment = 1
+
 [node name="DepthSlider" type="HSlider" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1278360574]
 layout_mode = 2
+min_value = 1.0
 max_value = 10.0
+value = 1.0
 
-[node name="DepthLabel2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1886522556]
+[node name="WarningLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1886522556]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Warning! Higher values 
 will increase loading 
-time greatly, especially
-on web"
+time greatly and
+cause a lot of lag,
+especially on web"
 horizontal_alignment = 1
 
 [node name="VSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1254290010]

@@ -25,21 +25,15 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr5yw"]
-size = Vector2(244, 4)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j2vp"]
-size = Vector2(4, 244)
-
 [sub_resource type="Gradient" id="Gradient_pa1cj"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.7108434)
+offsets = PackedFloat32Array(0, 0.37650603)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_pa1cj"]
 gradient = SubResource("Gradient_pa1cj")
-width = 615
-height = 615
+width = 1152
+height = 1152
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -71,53 +65,6 @@ player = NodePath("../Player")
 position = Vector2(302, 0)
 color = Color(0, 0.6310074, 0.6318191, 1)
 polygon = PackedVector2Array(0, 20, 0, -20, 20, 0)
-
-[node name="TopDownWalls" type="Area2D" parent="." unique_id=1194128046]
-process_mode = 4
-visible = false
-
-[node name="Bottom" type="CollisionShape2D" parent="TopDownWalls" unique_id=2010123997]
-position = Vector2(0, 122)
-shape = SubResource("RectangleShape2D_pr5yw")
-
-[node name="Top" type="CollisionShape2D" parent="TopDownWalls" unique_id=1626195363]
-position = Vector2(0, -122)
-shape = SubResource("RectangleShape2D_pr5yw")
-
-[node name="TopSprite" type="Polygon2D" parent="TopDownWalls" unique_id=656353033]
-z_index = 1
-color = Color(0, 0.6310074, 0.6318191, 1)
-polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
-
-[node name="BottomSprite" type="Polygon2D" parent="TopDownWalls" unique_id=1665048400]
-z_index = 1
-rotation = 3.1415927
-color = Color(0, 0.6310074, 0.6318191, 1)
-polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
-
-[node name="LeftRightWalls" type="Area2D" parent="." unique_id=984309629]
-process_mode = 4
-visible = false
-
-[node name="Left" type="CollisionShape2D" parent="LeftRightWalls" unique_id=189310376]
-position = Vector2(-122, 0)
-shape = SubResource("RectangleShape2D_3j2vp")
-
-[node name="Right" type="CollisionShape2D" parent="LeftRightWalls" unique_id=1099791040]
-position = Vector2(122, 0)
-shape = SubResource("RectangleShape2D_3j2vp")
-
-[node name="LeftSprite" type="Polygon2D" parent="LeftRightWalls" unique_id=2029275170]
-z_index = 1
-rotation = 4.712389
-color = Color(0, 0.6310074, 0.6318191, 1)
-polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
-
-[node name="RightSprite" type="Polygon2D" parent="LeftRightWalls" unique_id=982917280]
-z_index = 1
-rotation = 1.5707964
-color = Color(0, 0.6310074, 0.6318191, 1)
-polygon = PackedVector2Array(-203, -200, 203, -200, 203, -204, -203, -204)
 
 [node name="DebugLabel" type="RichTextLabel" parent="." unique_id=2061166878]
 visible = false
@@ -152,9 +99,7 @@ text = "Game Complete!"
 
 [node name="TileContainer" type="Node2D" parent="." unique_id=836584410]
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2035880424]
+[node name="SpriteOcluder" type="Sprite2D" parent="." unique_id=2035880424]
 texture = SubResource("GradientTexture2D_pa1cj")
 
-[connection signal="body_entered" from="TopDownWalls" to="." method="_on_top_down_walls_body_entered"]
-[connection signal="body_entered" from="LeftRightWalls" to="." method="_on_left_right_walls_body_entered"]
 [connection signal="restart_button_pressed" from="HyperPlanRenderer" to="." method="_on_hyper_plan_renderer_restart_button_pressed"]
