@@ -6,14 +6,11 @@ extends Node2D
 @export var debug_label: RichTextLabel
 @export var compass: Compass
 @export var game_complete_text: RichTextLabel
+@export var tile_container: Node2D
 
 var depth: int
 
-var loaded_tiles: Array[Array] = [
-	[null, null, null],
-	[null, null, null],
-	[null, null, null]
-]
+var loaded_tiles: Dictionary[Vector2i, Tile]
 
 signal game_won()
 
@@ -23,22 +20,25 @@ func _ready() -> void:
 	initialize_level()
 	debug_label.visible = SceneTransition.debug
 
+func _physics_process(delta: float) -> void:
+	tile_container.position += Vector2(player.out_of_bounds_x, player.out_of_bounds_y) * -player.SPEED * delta
+
 
 func disable_tile(tile: Tile) -> void:
-	if !is_instance_valid(tile):
-		return
 	tile.visible = false
 	tile.process_mode = Node.PROCESS_MODE_DISABLED
-	loaded_tiles[tile.grid_position.x][tile.grid_position.y] = null
 
 func enable_tile(tile: Tile, tile_position: Vector2i) -> void:
-	disable_tile(loaded_tiles[tile_position.x][tile_position.y])
-	loaded_tiles[tile_position.x][tile_position.y] = tile
+	var old_tile = loaded_tiles.get(tile_position)
+	if is_instance_valid(old_tile):
+		disable_tile(old_tile)
+	
+	loaded_tiles.set(tile_position, tile)
 
 	tile.grid_position = tile_position
 	tile.visible = true
 	tile.process_mode = Node.PROCESS_MODE_INHERIT
-	tile.position = (tile_position - Vector2i(1, 1)) * 135
+	tile.position = tile_position * 81
 
 	for key in tile.hyperplane_node.reachable_neighbors.keys():
 		var wall = tile.walls[key]
@@ -81,10 +81,10 @@ func enable_neighbor_tiles(tile: Tile):
 		index = wrapi(index - int(tile.rotation * 2 / PI), 0, 4)
 
 		match index:
-			0: neighbor_tile_position = Vector2i(wrapi(tile.grid_position.x + 1, 0, 3), tile.grid_position.y)
-			1: neighbor_tile_position = Vector2i(tile.grid_position.x, wrapi(tile.grid_position.y - 1, 0, 3))
-			2: neighbor_tile_position = Vector2i(wrapi(tile.grid_position.x - 1, 0, 3), tile.grid_position.y)
-			3: neighbor_tile_position = Vector2i(tile.grid_position.x, wrapi(tile.grid_position.y + 1, 0, 3))
+			0: neighbor_tile_position = Vector2i(tile.grid_position.x + 1, tile.grid_position.y)
+			1: neighbor_tile_position = Vector2i(tile.grid_position.x, tile.grid_position.y - 1)
+			2: neighbor_tile_position = Vector2i(tile.grid_position.x - 1, tile.grid_position.y)
+			3: neighbor_tile_position = Vector2i(tile.grid_position.x, tile.grid_position.y + 1)
 		
 		enable_tile(neighbor_tile, neighbor_tile_position)
 
@@ -124,7 +124,7 @@ func initialize_level() -> void:
 	var hyperplane = HyperPlane.new(depth)
 	for node in hyperplane.cell_hashmap.values():
 		var tile: Tile = tile_resource.instantiate()
-		add_child(tile)
+		tile_container.add_child(tile)
 		tile.visible = false
 		tile.process_mode = Node.PROCESS_MODE_DISABLED
 		tile.hyperplane_node = node
@@ -143,7 +143,7 @@ func initialize_level() -> void:
 		starting_tile = hyperplane.cell_hashmap.values().pick_random().tile
 		if len(starting_tile.hyperplane_node.coordinates) >= depth: break
 	generate_maze(starting_tile.hyperplane_node)
-	enable_tile(starting_tile, Vector2i(1, 1))
+	enable_tile(starting_tile, Vector2i(0, 0))
 
 	SceneTransition.fade_in()
 
@@ -151,15 +151,17 @@ func initialize_level() -> void:
 func _on_top_down_walls_body_entered(body: Node2D) -> void:
 	if body != player:
 		return
-	body.position.y = -185 * sign(body.position.y)
+	body.position.y = 100 * sign(body.position.y)
 
 func _on_left_right_walls_body_entered(body: Node2D) -> void:
 	if body != player:
 		return
-	body.position.x = -185 * sign(body.position.x)
+	body.position.x = 100 * sign(body.position.x)
 
 func wait_for_win(center_tile: Tile) -> void:
+	print("waiting for game to end")
 	await center_tile.body_entered
+	print("game won")
 	var tween = get_tree().create_tween()
 	tween.tween_property(game_complete_text, "position", Vector2(-277, -47.5), 1)
 	game_won.emit()

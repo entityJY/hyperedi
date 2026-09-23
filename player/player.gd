@@ -7,9 +7,23 @@ class_name Player
 var current_tile: Tile
 var markers: Array[Sprite2D]
 
+var out_of_bounds_x = 0
+var out_of_bounds_y = 0
+
 func _physics_process(_delta: float) -> void:
 	
 	velocity = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")) * SPEED
+
+	if position.x * sign(position.x) >= 100 and sign(velocity.x) == sign(position.x):
+		velocity.x = 0
+		out_of_bounds_x = sign(position.x)
+	else:
+		out_of_bounds_x = 0
+	if position.y * sign(position.y) >= 100 and sign(velocity.y) == sign(position.y):
+		velocity.y = 0
+		out_of_bounds_y = sign(position.y)
+	else:
+		out_of_bounds_y = 0
 
 	move_and_slide()
 

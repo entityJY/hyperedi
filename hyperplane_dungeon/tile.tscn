@@ -7,33 +7,34 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_pr5yw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr5yw"]
-size = Vector2(90, 90)
+size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5x38"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ncmvh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jusb"]
-size = Vector2(10, 130)
+size = Vector2(10, 90)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kwjmu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwjmu"]
-size = Vector2(130, 10)
+size = Vector2(90, 10)
 
-[node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "debug_label", "background")]
+[node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "debug_label", "background", "detector")]
 script = ExtResource("1_8jusb")
 walls = [NodePath("0"), NodePath("1"), NodePath("2"), NodePath("3")]
 debug_label = NodePath("DebugLabel")
 background = NodePath("Background")
+detector = NodePath("Area2D")
 
 [node name="Border" type="Sprite2D" parent="." unique_id=1258669480]
 modulate = Color(0.40069774, 0.40069774, 0.40069768, 1)
-scale = Vector2(135, 135)
+scale = Vector2(81, 81)
 texture = SubResource("CanvasTexture_1flmy")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=981243889]
-scale = Vector2(130, 130)
+scale = Vector2(78, 78)
 texture = SubResource("CanvasTexture_pr5yw")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=666074011]
@@ -44,51 +45,51 @@ shape = SubResource("RectangleShape2D_pr5yw")
 [node name="PermanentWalls" type="StaticBody2D" parent="." unique_id=1754191979]
 
 [node name="BR" type="CollisionShape2D" parent="PermanentWalls" unique_id=2032678624]
-position = Vector2(65, 65)
+position = Vector2(44, 44)
 shape = SubResource("RectangleShape2D_u5x38")
 
 [node name="BL" type="CollisionShape2D" parent="PermanentWalls" unique_id=1444820458]
-position = Vector2(-65, 65)
+position = Vector2(-44, 44)
 shape = SubResource("RectangleShape2D_u5x38")
 
 [node name="TL" type="CollisionShape2D" parent="PermanentWalls" unique_id=1473476479]
-position = Vector2(-65, -65)
+position = Vector2(-44, -44)
 shape = SubResource("RectangleShape2D_u5x38")
 
 [node name="TR" type="CollisionShape2D" parent="PermanentWalls" unique_id=611600508]
-position = Vector2(65, -65)
+position = Vector2(44, -44)
 shape = SubResource("RectangleShape2D_u5x38")
 
 [node name="BRSprite" type="Sprite2D" parent="PermanentWalls" unique_id=1742533761]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(65, 65)
+position = Vector2(44, 44)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="BLSprite" type="Sprite2D" parent="PermanentWalls" unique_id=662319085]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(-65, 65)
+position = Vector2(-44, 44)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="TLSprite" type="Sprite2D" parent="PermanentWalls" unique_id=1615961174]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(-65, -65)
+position = Vector2(-44, -44)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="TRSprite" type="Sprite2D" parent="PermanentWalls" unique_id=213435248]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(65, -65)
+position = Vector2(44, -44)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
 [node name="0" type="StaticBody2D" parent="." unique_id=7154654]
-position = Vector2(65, 0)
+position = Vector2(44, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="0" unique_id=343322297]
 shape = SubResource("RectangleShape2D_8jusb")
@@ -96,11 +97,11 @@ shape = SubResource("RectangleShape2D_8jusb")
 [node name="Sprite2D" type="Sprite2D" parent="0" unique_id=2046177747]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-scale = Vector2(10, 130)
+scale = Vector2(10, 90)
 texture = SubResource("CanvasTexture_kwjmu")
 
 [node name="1" type="StaticBody2D" parent="." unique_id=1150352967]
-position = Vector2(0, -65)
+position = Vector2(0, -44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="1" unique_id=1273030925]
 shape = SubResource("RectangleShape2D_kwjmu")
@@ -108,11 +109,11 @@ shape = SubResource("RectangleShape2D_kwjmu")
 [node name="Sprite2D" type="Sprite2D" parent="1" unique_id=508938442]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-scale = Vector2(130, 10)
+scale = Vector2(90, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 
 [node name="2" type="StaticBody2D" parent="." unique_id=956310327]
-position = Vector2(-65, 0)
+position = Vector2(-44, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="2" unique_id=1989241879]
 shape = SubResource("RectangleShape2D_8jusb")
@@ -120,11 +121,11 @@ shape = SubResource("RectangleShape2D_8jusb")
 [node name="Sprite2D" type="Sprite2D" parent="2" unique_id=1227831460]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-scale = Vector2(10, 130)
+scale = Vector2(10, 90)
 texture = SubResource("CanvasTexture_kwjmu")
 
 [node name="3" type="StaticBody2D" parent="." unique_id=1365656111]
-position = Vector2(0, 65)
+position = Vector2(0, 44)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="3" unique_id=879951348]
 shape = SubResource("RectangleShape2D_kwjmu")
@@ -132,7 +133,7 @@ shape = SubResource("RectangleShape2D_kwjmu")
 [node name="Sprite2D" type="Sprite2D" parent="3" unique_id=1069959841]
 modulate = Color(0, 0, 0, 1)
 z_index = 2
-scale = Vector2(130, 10)
+scale = Vector2(90, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 
 [node name="DebugLabel" type="Label" parent="." unique_id=1210329761]

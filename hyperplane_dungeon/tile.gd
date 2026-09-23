@@ -6,6 +6,7 @@ class_name Tile
 @export var walls: Array[StaticBody2D]
 @export var debug_label: Label
 @export var background: Sprite2D
+@export var detector: Area2D
 
 var grid_position: Vector2i
 var hyperplane_node: HyperPlaneNode
