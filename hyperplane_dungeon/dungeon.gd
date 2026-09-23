@@ -21,7 +21,7 @@ func _ready() -> void:
 	debug_label.visible = SceneTransition.debug
 
 func _physics_process(delta: float) -> void:
-	tile_container.position += Vector2(player.out_of_bounds_x, player.out_of_bounds_y) * -player.SPEED * delta
+	tile_container.position -= Vector2(player.out_of_bounds_x, player.out_of_bounds_y) * delta
 
 
 func disable_tile(tile: Tile) -> void:

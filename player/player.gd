@@ -16,12 +16,12 @@ func _physics_process(_delta: float) -> void:
 
 	if position.x * sign(position.x) >= 100 and sign(velocity.x) == sign(position.x):
 		velocity.x = 0
-		out_of_bounds_x = sign(position.x)
+		out_of_bounds_x = sign(position.x) * SPEED
 	else:
 		out_of_bounds_x = 0
 	if position.y * sign(position.y) >= 100 and sign(velocity.y) == sign(position.y):
 		velocity.y = 0
-		out_of_bounds_y = sign(position.y)
+		out_of_bounds_y = sign(position.y) * SPEED 
 	else:
 		out_of_bounds_y = 0
 
