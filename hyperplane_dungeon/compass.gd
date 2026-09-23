@@ -39,7 +39,6 @@ func _process(_delta: float) -> void:
 				player_position.y += 135
 	
 	var angle_to_center = player_position.angle() - current_tile.rotation
-	# print(player_position)
 	rotation = angle_to_center
 
 

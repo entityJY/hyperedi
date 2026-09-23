@@ -159,9 +159,7 @@ func _on_left_right_walls_body_entered(body: Node2D) -> void:
 	body.position.x = 100 * sign(body.position.x)
 
 func wait_for_win(center_tile: Tile) -> void:
-	print("waiting for game to end")
 	await center_tile.body_entered
-	print("game won")
 	var tween = get_tree().create_tween()
 	tween.tween_property(game_complete_text, "position", Vector2(-277, -47.5), 1)
 	game_won.emit()
