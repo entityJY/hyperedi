@@ -12,6 +12,9 @@ signal animation_finished()
 var dungeon_depth: int = 3
 var debug: bool = false
 
+## 0 generates a perfect maze, 1 removes all walls
+var connectedness_factor: float = .3
+
 
 func _ready() -> void:
 	_on_audio_stream_player_finished()

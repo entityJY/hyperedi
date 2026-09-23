@@ -8,15 +8,12 @@ extends Node2D
 @export var game_complete_text: RichTextLabel
 @export var tile_container: Node2D
 
-var depth: int
-
 var loaded_tiles: Dictionary[Vector2i, Tile]
 
 signal game_won()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	depth = SceneTransition.dungeon_depth
 	initialize_level()
 	debug_label.visible = SceneTransition.debug
 
@@ -64,10 +61,10 @@ func enable_neighbor_tiles(tile: Tile):
 		var neighbor_tile = node.tile
 
 		var final_rotation_int: int
-		match index - from_index:
-			-3: final_rotation_int = 1
-			-2: final_rotation_int = 0
-			-1: final_rotation_int = 3
+		match wrapi(index - from_index, 0, 4):
+			# -3: final_rotation_int = 1
+			# -2: final_rotation_int = 0
+			# -1: final_rotation_int = 3
 			0: final_rotation_int = 2
 			1: final_rotation_int = 1
 			2: final_rotation_int = 0
@@ -90,38 +87,40 @@ func enable_neighbor_tiles(tile: Tile):
 
 func generate_maze(node: HyperPlaneNode) -> void:
 	
-	var explore_stack: Array[HyperPlaneNode] = []
-	explore_stack.push_back(node)
-	node.explored = true
-
+	var explore_stack: Array[HyperPlaneNode] = [node]
 	var rng = RandomNumberGenerator.new()
 
-	while true:
-		var filtered_nodes = node.neighbors.values().filter(
-			func(neighbor): return neighbor != explore_stack[-1] and neighbor.explored == false
-		)
+	while !explore_stack.is_empty():
+		node = explore_stack[-1]
 
-		if rng.randf() > .6:
-			var neighbor_node = node.neighbors.values().pick_random()
-			node.reachable_neighbors[node.neighbors.find_key(neighbor_node)] = neighbor_node
-			neighbor_node.reachable_neighbors[neighbor_node.neighbors.find_key(node)] = node
+		if !node.explored:
+			for neighbor in node.neighbors.values():
+				if !neighbor.explored and rng.randf() < SceneTransition.connectedness_factor:
+					connect_nodes(node, neighbor)
+
+		node.explored = true
+
+		var filtered_nodes = node.neighbors.values().filter(
+			func(neighbor):
+				if !(len(explore_stack) - 1):
+					return !neighbor.explored
+				return !neighbor.explored and neighbor != explore_stack[-2]
+		)
 
 		if !filtered_nodes.is_empty():
 			var neighbor_node = filtered_nodes.pick_random()
-			node.reachable_neighbors[node.neighbors.find_key(neighbor_node)] = neighbor_node
-			neighbor_node.reachable_neighbors[neighbor_node.neighbors.find_key(node)] = node
+			connect_nodes(node, neighbor_node)
 
-			node = neighbor_node
-			explore_stack.push_back(node)
-			node.explored = true
+			explore_stack.push_back(neighbor_node)
 		else:
 			explore_stack.pop_back()
-			if explore_stack.is_empty():
-				break
-			node = explore_stack[-1]
+		
+func connect_nodes(node1: HyperPlaneNode, node2: HyperPlaneNode) -> void:
+	node1.reachable_neighbors[node1.neighbors.find_key(node2)] = node2
+	node2.reachable_neighbors[node2.neighbors.find_key(node1)] = node1
 			
 func initialize_level() -> void:
-	var hyperplane = HyperPlane.new(depth - 1)
+	var hyperplane = HyperPlane.new(SceneTransition.dungeon_depth - 1)
 	for node in hyperplane.cell_hashmap.values():
 		var tile: Tile = tile_resource.instantiate()
 		tile_container.add_child(tile)
@@ -139,9 +138,11 @@ func initialize_level() -> void:
 			wait_for_win(tile)
 	
 	var starting_tile: Tile
+
 	while true:
 		starting_tile = hyperplane.cell_hashmap.values().pick_random().tile
-		if len(starting_tile.hyperplane_node.coordinates) >= depth: break
+		if len(starting_tile.hyperplane_node.coordinates) >= SceneTransition.dungeon_depth - 1: break
+	
 	generate_maze(starting_tile.hyperplane_node)
 	enable_tile(starting_tile, Vector2i(0, 0))
 
@@ -152,7 +153,6 @@ func wait_for_win(center_tile: Tile) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(game_complete_text, "position", Vector2(299, 276.5), 1)
 	game_won.emit()
-
 
 func _on_hyper_plan_renderer_restart_button_pressed() -> void:
 	SceneTransition.fade_out()

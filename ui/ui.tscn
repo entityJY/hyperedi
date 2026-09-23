@@ -26,13 +26,15 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label")]
+[node name="UI" type="CanvasLayer" unique_id=1106087896 node_paths=PackedStringArray("credits", "depth_label", "depth_slider", "debug_button", "num_rooms_label", "connectedness_label", "connectedness_slider")]
 script = ExtResource("1_t1rqr")
 credits = NodePath("RichTextLabel")
 depth_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthLabel")
 depth_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider")
 debug_button = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug")
 num_rooms_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/NumRoomsLabel")
+connectedness_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessLabel")
+connectedness_slider = NodePath("PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1021052557]
 anchors_preset = 15
@@ -99,13 +101,13 @@ theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
 
 [node name="DepthLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=299942730]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 19
 text = "Current Depth: "
 horizontal_alignment = 1
 
 [node name="NumRoomsLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1553628423]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 19
 text = "Rooms: "
 horizontal_alignment = 1
 
@@ -119,13 +121,27 @@ value = 1.0
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Warning! Higher values 
-will increase loading 
-time greatly and
-cause a lot of lag,
-especially on web"
+will cause a lot of lag"
 horizontal_alignment = 1
 
 [node name="VSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1254290010]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
+
+[node name="ConnectednessLabel" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=1866929366]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Connectedness: 0.95"
+horizontal_alignment = 1
+
+[node name="ConnectednessSlider" type="HSlider" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=721274649]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="VSeparator4" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2" unique_id=159716166]
 layout_mode = 2
 theme_override_constants/separation = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_ks8t7")
@@ -183,5 +199,6 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Restart" to="." method="_on_button_button_down"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/DepthSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/ConnectednessSlider" to="." method="_on_connectedness_slider_value_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Debug" to="." method="_on_debug_toggled"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer2/Credits" to="." method="_on_credits_button_down"]

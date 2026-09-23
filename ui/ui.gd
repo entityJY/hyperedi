@@ -5,6 +5,9 @@ extends CanvasLayer
 @export var depth_slider: HSlider
 @export var debug_button: Button
 @export var num_rooms_label: Label
+@export var connectedness_label: Label
+@export var connectedness_slider: HSlider
+
 var credits_toggled: bool = false
 signal restart_button_pressed()
 
@@ -14,6 +17,7 @@ var room_num_sequence: Array[int] = [1, 5, 17, 45, 109, 253, 577, 1305, 2941, 66
 func _ready() -> void:
 	var _hyperplane = HyperPlane.new(2)
 	update_depth()
+	update_connectedness()
 	debug_button.set_pressed_no_signal(SceneTransition.debug)
 	
 
@@ -29,6 +33,11 @@ func update_depth() -> void:
 	depth_label.text = "Current Depth: " + str(SceneTransition.dungeon_depth)
 	depth_slider.value = SceneTransition.dungeon_depth
 	num_rooms_label.text = "Rooms: " + str(room_num_sequence[SceneTransition.dungeon_depth])
+
+
+func update_connectedness() -> void:
+	connectedness_label.text = "Connectedness: " + str(SceneTransition.connectedness_factor)
+	connectedness_slider.value = SceneTransition.connectedness_factor
 
 
 func _on_button_button_down() -> void:
@@ -53,3 +62,7 @@ func _on_h_slider_value_changed(value: float) -> void:
 func _on_debug_toggled(toggled_on: bool) -> void:
 	SceneTransition.debug = toggled_on
 	restart_button_pressed.emit()
+
+func _on_connectedness_slider_value_changed(value: float) -> void:
+	SceneTransition.connectedness_factor = value
+	update_connectedness()
