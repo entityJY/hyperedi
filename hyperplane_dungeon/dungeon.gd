@@ -150,7 +150,7 @@ func initialize_level() -> void:
 func wait_for_win(center_tile: Tile) -> void:
 	await center_tile.body_entered
 	var tween = get_tree().create_tween()
-	tween.tween_property(game_complete_text, "position", Vector2(-277, -47.5), 1)
+	tween.tween_property(game_complete_text, "position", Vector2(299, 276.5), 1)
 	game_won.emit()
 
 

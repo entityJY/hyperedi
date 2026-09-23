@@ -13,13 +13,22 @@ size = Vector2(60, 60)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ncmvh"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pr5yw"]
+polygon = PackedVector2Array(40, 40, 60, 40, 60, 60, 40, 60)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jusb"]
 size = Vector2(10, 90)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kwjmu"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u5x38"]
+polygon = PackedVector2Array(5, 45, -5, 45, -5, -45, 5, -45)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwjmu"]
 size = Vector2(90, 10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8jusb"]
+polygon = PackedVector2Array(45, 5, 45, -5, -45, -5, -45, 5)
 
 [node name="Tile" type="Node2D" unique_id=1757197444 node_paths=PackedStringArray("walls", "debug_label", "background", "detector")]
 script = ExtResource("1_8jusb")
@@ -88,6 +97,21 @@ position = Vector2(50, -50)
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_ncmvh")
 
+[node name="BROcluder" type="LightOccluder2D" parent="PermanentWalls" unique_id=1866953809]
+occluder = SubResource("OccluderPolygon2D_pr5yw")
+
+[node name="BLOcluder" type="LightOccluder2D" parent="PermanentWalls" unique_id=1769674722]
+rotation = 1.5707964
+occluder = SubResource("OccluderPolygon2D_pr5yw")
+
+[node name="TLOcluder" type="LightOccluder2D" parent="PermanentWalls" unique_id=1774268420]
+rotation = 3.1415927
+occluder = SubResource("OccluderPolygon2D_pr5yw")
+
+[node name="TROcluder" type="LightOccluder2D" parent="PermanentWalls" unique_id=459696707]
+rotation = 4.712389
+occluder = SubResource("OccluderPolygon2D_pr5yw")
+
 [node name="0" type="StaticBody2D" parent="." unique_id=7154654]
 position = Vector2(50, 0)
 
@@ -99,6 +123,9 @@ modulate = Color(0, 0, 0, 1)
 z_index = 2
 scale = Vector2(10, 90)
 texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="0" unique_id=1267717330]
+occluder = SubResource("OccluderPolygon2D_u5x38")
 
 [node name="1" type="StaticBody2D" parent="." unique_id=1150352967]
 position = Vector2(0, -50)
@@ -112,6 +139,9 @@ z_index = 2
 scale = Vector2(90, 10)
 texture = SubResource("CanvasTexture_kwjmu")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="1" unique_id=1514969482]
+occluder = SubResource("OccluderPolygon2D_8jusb")
+
 [node name="2" type="StaticBody2D" parent="." unique_id=956310327]
 position = Vector2(-50, 0)
 
@@ -124,6 +154,9 @@ z_index = 2
 scale = Vector2(10, 90)
 texture = SubResource("CanvasTexture_kwjmu")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="2" unique_id=1366799870]
+occluder = SubResource("OccluderPolygon2D_u5x38")
+
 [node name="3" type="StaticBody2D" parent="." unique_id=1365656111]
 position = Vector2(0, 50)
 
@@ -135,6 +168,9 @@ modulate = Color(0, 0, 0, 1)
 z_index = 2
 scale = Vector2(90, 10)
 texture = SubResource("CanvasTexture_kwjmu")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="3" unique_id=1439212809]
+occluder = SubResource("OccluderPolygon2D_8jusb")
 
 [node name="DebugLabel" type="Label" parent="." unique_id=1210329761]
 modulate = Color(0, 0, 0, 1)
