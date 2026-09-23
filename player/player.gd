@@ -29,8 +29,12 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("place") and is_instance_valid(current_tile):
+		for marker in markers:
+			marker.modulate.a -= .2
+		
 		var duped_sprite = sprite.duplicate()
 		duped_sprite.modulate = Color.from_string("00a1a1", Color.CYAN)
+		duped_sprite.z_index = 5
 		var saved_position = global_position
 		var saved_rotation = global_rotation
 		current_tile.add_child(duped_sprite)
